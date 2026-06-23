@@ -12,10 +12,10 @@ git commit -m "$commitMessage"
 Write-Host "--- Pushing to GitHub ---" -ForegroundColor Cyan
 git push
 
-dotnet pack Perp.Nexus.Core --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
+dotnet pack Perp.Nexus\Perp.Nexus.Core --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
 
 dotnet nuget push ..\packages\Perp.Nexus.Core.$version.nupkg --api-key $env:PECULIAERP_GITHUB_KEY --source "peculiar-github"
 
-dotnet pack Perp.Nexus.Infrastructure --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
+dotnet pack Perp.Nexus\Perp.Nexus.Infrastructure --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
 
 dotnet nuget push ..\packages\Perp.Nexus.Infrastructure.$version.nupkg --api-key $env:PECULIAERP_GITHUB_KEY --source "peculiar-github"
