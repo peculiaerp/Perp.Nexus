@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.editorconfig" />
+    <File Path="../.gitignore" />
+    <File Path="../Directory.Build.props" />
+    <File Path="../Directory.Packages.props" />
+    <File Path="../PackageScripts.ps1" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="Perp.Nexus.AdminDashboard/Perp.Nexus.AdminDashboard.csproj" />
+  <Project Path="Perp.Nexus.Core/Perp.Nexus.Core.csproj" />
+  <Project Path="Perp.Nexus.Infrastructure/Perp.Nexus.Infrastructure.csproj" />
+</Solution>

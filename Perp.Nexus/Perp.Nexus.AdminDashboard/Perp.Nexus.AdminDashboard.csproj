@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<NugetAudit>false</NugetAudit>
+  </PropertyGroup>
+
+	
+
+  <ItemGroup>
+    <ProjectReference Include="..\Perp.Nexus.Core\Perp.Nexus.Core.csproj" />
+    <ProjectReference Include="..\Perp.Nexus.Infrastructure\Perp.Nexus.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
