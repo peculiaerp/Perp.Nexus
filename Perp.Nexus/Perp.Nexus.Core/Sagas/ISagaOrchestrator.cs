@@ -1,4 +1,5 @@
 using Perp.Nexus.Core.Bus;
+using Perp.Nexus.Core.Messages;
 
 namespace Perp.Nexus.Core.Sagas;
 

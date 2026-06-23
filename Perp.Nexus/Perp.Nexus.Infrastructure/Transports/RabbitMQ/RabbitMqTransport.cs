@@ -15,7 +15,7 @@ internal sealed class RabbitMqTransport : IMessageTransport, IAsyncDisposable
     private readonly string _exchange;
     private readonly ILogger<RabbitMqTransport> _logger;
 
-    public RabbitMqTransport(string connectionString, string exchange = "masstransist", ILogger<RabbitMqTransport>? logger = null)
+    public RabbitMqTransport(string connectionString, string exchange = "perpnexus", ILogger<RabbitMqTransport>? logger = null)
     {
         _exchange = exchange;
         _logger = logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger<RabbitMqTransport>.Instance;

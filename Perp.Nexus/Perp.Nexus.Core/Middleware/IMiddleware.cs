@@ -16,7 +16,7 @@ public sealed class MiddlewareContext
     public CancellationToken CancellationToken { get; init; }
 }
 
-public sealed class MiddlewarePipeline
+public sealed class MiddlewarePipeline : IAsyncDisposable, IDisposable
 {
     private readonly List<IMiddleware> _middlewares;
 
@@ -43,5 +43,22 @@ public sealed class MiddlewarePipeline
         }
 
         await Next();
+    }
+
+    public void Dispose()
+    {
+        // Block the sync call only if absolutely necessary, or leave empty if async is required
+        ////DisposeAsync().GetAwaiter().GetResult();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        foreach (var middleware in _middlewares)
+        {
+            if (middleware is IAsyncDisposable asyncDisposable)
+                await asyncDisposable.DisposeAsync();
+            else if (middleware is IDisposable disposable)
+                disposable.Dispose();
+        }
     }
 }

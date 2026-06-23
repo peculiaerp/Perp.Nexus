@@ -5,7 +5,9 @@ using Perp.Nexus.Core.Scheduling;
 
 namespace Perp.Nexus.AdminDashboard.Hubs;
 
-internal sealed class MessagingHub : Hub
+#pragma warning disable CA1515 // Consider making public types internal
+public sealed class MessagingHub : Hub
+#pragma warning restore CA1515 // Consider making public types internal
 {
     private readonly IDeadLetterStore _deadLetterStore;
     private readonly IOutboxStore _outboxStore;

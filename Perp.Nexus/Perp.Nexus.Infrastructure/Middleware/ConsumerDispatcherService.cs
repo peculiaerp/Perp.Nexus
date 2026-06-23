@@ -1,14 +1,14 @@
-using Perp.Nexus.Core.Bus;
-using Perp.Nexus.Core.Middleware;
-using Perp.Nexus.Core.Transports;
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
+using Perp.Nexus.Core.Bus;
+using Perp.Nexus.Core.Middleware;
+using Perp.Nexus.Core.Transports;
 
 namespace Perp.Nexus.Infrastructure.Middleware;
 
-internal sealed class ConsumerDispatcherService : BackgroundService
+internal sealed class ConsumerDispatcherService : BackgroundService, IAsyncDisposable
 {
     private readonly IMessageTransport _transport;
     private readonly IServiceProvider _serviceProvider;
@@ -22,6 +22,11 @@ internal sealed class ConsumerDispatcherService : BackgroundService
         _transport = transport;
         _serviceProvider = serviceProvider;
         _logger = logger;
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        return ValueTask.CompletedTask;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

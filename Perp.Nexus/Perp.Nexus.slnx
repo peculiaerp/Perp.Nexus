@@ -7,6 +7,7 @@
     <File Path="../PackageScripts.ps1" />
     <File Path="../README.md" />
   </Folder>
+  <Project Path="OrderSystem/OrderSystem.csproj" Id="1b07f061-d59c-4302-b029-9fbf76070dff" />
   <Project Path="Perp.Nexus.AdminDashboard/Perp.Nexus.AdminDashboard.csproj" />
   <Project Path="Perp.Nexus.Core/Perp.Nexus.Core.csproj" />
   <Project Path="Perp.Nexus.Infrastructure/Perp.Nexus.Infrastructure.csproj" />

@@ -3,7 +3,7 @@ using Perp.Nexus.Core.Middleware;
 
 namespace Perp.Nexus.Infrastructure.Middleware;
 
-internal sealed class RateLimitingMiddleware : IMiddleware, IDisposable
+internal sealed class RateLimitingMiddleware : IMiddleware, IAsyncDisposable
 {
     private readonly TokenBucketRateLimiter _rateLimiter;
 
@@ -29,9 +29,9 @@ internal sealed class RateLimitingMiddleware : IMiddleware, IDisposable
         await next();
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
-        _rateLimiter.Dispose();
+        await _rateLimiter.DisposeAsync();
     }
 }
 

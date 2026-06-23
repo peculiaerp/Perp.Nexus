@@ -28,7 +28,7 @@ namespace Perp.Nexus.Infrastructure.DependencyInjection;
 
 public static class InfrastructureServiceExtensions
 {
-    public static NexusBuilder AddNexusInfrastructure(this NexusBuilder builder, Action<InfrastructureOptions> configure)
+    public static PerpNexusBuilder AddPerpNexusInfrastructure(this PerpNexusBuilder builder, Action<InfrastructureOptions> configure)
     {
         var options = new InfrastructureOptions();
         configure(options);
@@ -139,7 +139,7 @@ public static class InfrastructureServiceExtensions
         return builder;
     }
 
-    public static NexusBuilder AddRabbitMqTransport(this NexusBuilder builder, string connectionString, string exchange = "masstransist")
+    public static PerpNexusBuilder AddRabbitMqTransport(this PerpNexusBuilder builder, string connectionString, string exchange = "perpnexus")
     {
         builder.Services.AddSingleton<IMessageTransport>(sp =>
         {
@@ -149,7 +149,7 @@ public static class InfrastructureServiceExtensions
         return builder;
     }
 
-    public static NexusBuilder AddKafkaTransport(this NexusBuilder builder, string bootstrapServers)
+    public static PerpNexusBuilder AddKafkaTransport(this PerpNexusBuilder builder, string bootstrapServers)
     {
         builder.Services.AddSingleton<IMessageTransport>(sp =>
         {
@@ -159,7 +159,7 @@ public static class InfrastructureServiceExtensions
         return builder;
     }
 
-    public static NexusBuilder AddInMemoryTransport(this NexusBuilder builder)
+    public static PerpNexusBuilder AddInMemoryTransport(this PerpNexusBuilder builder)
     {
         builder.Services.AddSingleton<IMessageTransport, InMemoryTransport>();
         return builder;
@@ -172,7 +172,7 @@ public sealed class InfrastructureOptions
     public string? RedisConnectionString { get; set; }
     public string? TransportType { get; set; }
     public string? TransportConnectionString { get; set; }
-    public string RabbitMqExchange { get; set; } = "masstransist";
+    public string RabbitMqExchange { get; set; } = "perpnexus";
     public Action<DbContextOptionsBuilder>? ConfigureDbContext { get; set; }
 
     public bool UseRetry { get; set; } = true;

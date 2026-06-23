@@ -1,5 +1,5 @@
 $owner="peculiaerp"
-$version="1.0.1"
+$version="1.0.2"
 
 $commitMessage="Updated"
 

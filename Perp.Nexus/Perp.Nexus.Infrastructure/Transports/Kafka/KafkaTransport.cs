@@ -49,7 +49,7 @@ internal sealed class KafkaTransport : IMessageTransport, IDisposable
         var config = new ConsumerConfig
         {
             BootstrapServers = _bootstrapServers,
-            GroupId = "masstransist-consumer-group",
+            GroupId = "perpnexus-consumer-group",
             AutoOffsetReset = AutoOffsetReset.Earliest,
             EnableAutoCommit = true
         };
@@ -85,7 +85,6 @@ internal sealed class KafkaTransport : IMessageTransport, IDisposable
     {
         await _subscriptionCts!.CancelAsync();
         _consumer?.Unsubscribe();
-        ////return Task.CompletedTask;
     }
 
     public void Dispose()

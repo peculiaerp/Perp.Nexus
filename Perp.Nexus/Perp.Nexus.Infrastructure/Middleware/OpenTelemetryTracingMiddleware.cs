@@ -5,7 +5,7 @@ namespace Perp.Nexus.Infrastructure.Middleware;
 
 internal sealed class OpenTelemetryTracingMiddleware : IMiddleware
 {
-    private static readonly ActivitySource ActivitySource = new("Masstransist.Middleware");
+    private static readonly ActivitySource ActivitySource = new("Perp.Nexus.Middleware");
 
     public async Task InvokeAsync(MiddlewareContext context, Func<Task> next)
     {

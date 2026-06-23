@@ -6,7 +6,7 @@ namespace Perp.Nexus.Infrastructure.Observability;
 
 internal sealed class OpenTelemetryTracker : IMessageTracker
 {
-    private static readonly ActivitySource ActivitySource = new("Masstransist");
+    private static readonly ActivitySource ActivitySource = new("PerpNexus");
 
     public void TrackPublish(EventEnvelope envelope)
     {

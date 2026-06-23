@@ -7,7 +7,7 @@ using Perp.Nexus.Core.Transports;
 
 namespace Perp.Nexus.Infrastructure.Middleware;
 
-internal sealed class MessageBus : IBus
+internal sealed class MessageBus : IBus, IAsyncDisposable, IDisposable
 {
     private readonly IMessageTransport _transport;
     private readonly MiddlewarePipeline _publishPipeline;
@@ -117,5 +117,17 @@ internal sealed class MessageBus : IBus
             CorrelationId = Guid.NewGuid(),
             Timestamp = DateTime.UtcNow
         };
+    }
+
+    public void Dispose()
+    {
+        // Block the sync call only if absolutely necessary, or leave empty if async is required
+        ////DisposeAsync().GetAwaiter().GetResult();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _publishPipeline.DisposeAsync();
+        await _sendPipeline.DisposeAsync();
     }
 }

@@ -5,7 +5,7 @@ Perculiar ERP Messaging Framework.
 ### Perp.Nexus.Core
 ```powershell
 $owner="peculiaerp"
-$version="1.0.1"
+$version="1.0.2"
 
 dotnet pack Perp.Nexus.Core --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
 

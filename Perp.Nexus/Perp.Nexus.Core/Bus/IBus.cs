@@ -1,3 +1,5 @@
+using Perp.Nexus.Core.Messages;
+
 namespace Perp.Nexus.Core.Bus;
 
 public interface IBus

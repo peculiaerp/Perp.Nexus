@@ -450,3 +450,6 @@ dotnet_diagnostic.CA1711.severity = none
 
 # CS8795 Partial member must have an implementation part because it has accessibility modifiers.
 dotnet_diagnostic.CS8795.severity = none
+
+#CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none

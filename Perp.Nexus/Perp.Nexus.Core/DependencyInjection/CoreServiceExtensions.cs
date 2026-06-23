@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using Perp.Nexus.Core.Bus;
 using Perp.Nexus.Core.DeadLetter;
 using Perp.Nexus.Core.Inbox;
@@ -9,51 +8,52 @@ using Perp.Nexus.Core.Sagas;
 using Perp.Nexus.Core.Scheduling;
 using Perp.Nexus.Core.SchemaRegistry;
 using Perp.Nexus.Core.Transports;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Perp.Nexus.Core.DependencyInjection;
 
-public sealed class NexusBuilder
+public sealed class PerpNexusBuilder
 {
     public IServiceCollection Services { get; }
-    public NexusBuilder(IServiceCollection services) => Services = services;
+    public PerpNexusBuilder(IServiceCollection services) => Services = services;
 
-    public NexusBuilder WithSagaPersistence<TStore>() where TStore : class, ISagaStore
+    public PerpNexusBuilder WithSagaPersistence<TStore>() where TStore : class, ISagaStore
     {
         Services.AddScoped<ISagaStore, TStore>();
         return this;
     }
 
-    public NexusBuilder WithOutboxPersistence<TStore>() where TStore : class, IOutboxStore
+    public PerpNexusBuilder WithOutboxPersistence<TStore>() where TStore : class, IOutboxStore
     {
         Services.AddScoped<IOutboxStore, TStore>();
         return this;
     }
 
-    public NexusBuilder WithInboxPersistence<TStore>() where TStore : class, IInboxStore
+    public PerpNexusBuilder WithInboxPersistence<TStore>() where TStore : class, IInboxStore
     {
         Services.AddScoped<IInboxStore, TStore>();
         return this;
     }
 
-    public NexusBuilder WithDeadLetterPersistence<TStore>() where TStore : class, IDeadLetterStore
+    public PerpNexusBuilder WithDeadLetterPersistence<TStore>() where TStore : class, IDeadLetterStore
     {
         Services.AddScoped<IDeadLetterStore, TStore>();
         return this;
     }
 
-    public NexusBuilder WithSchedulerPersistence<TStore>() where TStore : class, ISchedulerStore
+    public PerpNexusBuilder WithSchedulerPersistence<TStore>() where TStore : class, ISchedulerStore
     {
         Services.AddScoped<ISchedulerStore, TStore>();
         return this;
     }
 
-    public NexusBuilder WithSchemaRegistry<TStore>() where TStore : class, ISchemaRegistry
+    public PerpNexusBuilder WithSchemaRegistry<TStore>() where TStore : class, ISchemaRegistry
     {
         Services.AddScoped<ISchemaRegistry, TStore>();
         return this;
     }
 
-    public NexusBuilder WithTransport<TTransport>() where TTransport : class, IMessageTransport
+    public PerpNexusBuilder WithTransport<TTransport>() where TTransport : class, IMessageTransport
     {
         Services.AddSingleton<IMessageTransport, TTransport>();
         return this;
@@ -62,14 +62,14 @@ public sealed class NexusBuilder
 
 public static class CoreServiceExtensions
 {
-    public static NexusBuilder AddNexusCore(this IServiceCollection services)
+    public static PerpNexusBuilder AddPerpNexusCore(this IServiceCollection services)
     {
         services.AddScoped<IMessageTracker, DefaultMessageTracker>();
-        return new NexusBuilder(services);
+        return new PerpNexusBuilder(services);
     }
 
     public static IServiceCollection AddMessageConsumer<TMessage, TConsumer>(this IServiceCollection services)
-      where TConsumer : class, IConsumer<TMessage>
+        where TConsumer : class, IConsumer<TMessage>
     {
         services.AddScoped<IConsumer<TMessage>, TConsumer>();
         services.AddScoped<TConsumer>();
