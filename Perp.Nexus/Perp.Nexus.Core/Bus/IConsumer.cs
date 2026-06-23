@@ -2,12 +2,12 @@ using Perp.Nexus.Core.Messages;
 
 namespace Perp.Nexus.Core.Bus;
 
-public interface IConsumer<T> where T : class
+public interface IConsumer<T>
 {
     Task ConsumeAsync(ConsumeContext<T> context, CancellationToken cancellationToken = default);
 }
 
-public sealed class ConsumeContext<T> where T : class
+public sealed class ConsumeContext<T>
 {
     public required T Message { get; init; }
     public required EventEnvelope Envelope { get; init; }

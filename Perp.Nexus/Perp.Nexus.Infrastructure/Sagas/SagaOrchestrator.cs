@@ -19,7 +19,7 @@ internal sealed class SagaOrchestrator<TState> : ISagaOrchestrator where TState 
         _transitionHandler = transitionHandler;
     }
 
-    public async Task HandleAsync<T>(ConsumeContext<T> context, CancellationToken cancellationToken = default) where T : class
+    public async Task HandleAsync<T>(ConsumeContext<T> context, CancellationToken cancellationToken = default)
     {
         var correlationId = context.Envelope.CorrelationId;
         var state = await _store.LoadAsync<TState>(correlationId, cancellationToken);

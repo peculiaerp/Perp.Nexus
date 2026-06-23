@@ -1,10 +1,9 @@
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Perp.Nexus.Core.Bus;
 using Perp.Nexus.Core.Messages;
 using Perp.Nexus.Core.Middleware;
 using Perp.Nexus.Core.Transports;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Perp.Nexus.Infrastructure.Middleware;
 
@@ -31,7 +30,7 @@ internal sealed class MessageBus : IBus
         _sendPipeline = new MiddlewarePipeline(middlewareList);
     }
 
-    public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) where T : class
+    public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
     {
         var envelope = CreateEnvelope(message, "Publish");
         var context = new MiddlewareContext
@@ -48,7 +47,7 @@ internal sealed class MessageBus : IBus
         _logger.LogInformation("Published {Type} [{MessageId}]", envelope.Type, envelope.MessageId);
     }
 
-    public async Task SendAsync<T>(T message, string destination, CancellationToken cancellationToken = default) where T : class
+    public async Task SendAsync<T>(T message, string destination, CancellationToken cancellationToken = default)
     {
         var envelope = CreateEnvelope(message, "Send");
         envelope = envelope.WithHeader("destination", destination);
@@ -67,7 +66,7 @@ internal sealed class MessageBus : IBus
         _logger.LogInformation("Sent {Type} [{MessageId}] to {Destination}", envelope.Type, envelope.MessageId, destination);
     }
 
-    public async Task PublishWithCorrelationAsync<T>(T message, Guid correlationId, Guid? causationId = null, CancellationToken cancellationToken = default) where T : class
+    public async Task PublishWithCorrelationAsync<T>(T message, Guid correlationId, Guid? causationId = null, CancellationToken cancellationToken = default)
     {
         var envelope = CreateEnvelope(message, "Publish");
         envelope = envelope.WithCorrelationId(correlationId);
@@ -87,7 +86,7 @@ internal sealed class MessageBus : IBus
         _logger.LogInformation("Published {Type} [{MessageId}] with correlation {CorrelationId}", envelope.Type, envelope.MessageId, correlationId);
     }
 
-    public async Task SendWithCorrelationAsync<T>(T message, string destination, Guid correlationId, Guid? causationId = null, CancellationToken cancellationToken = default) where T : class
+    public async Task SendWithCorrelationAsync<T>(T message, string destination, Guid correlationId, Guid? causationId = null, CancellationToken cancellationToken = default)
     {
         var envelope = CreateEnvelope(message, "Send");
         envelope = envelope.WithCorrelationId(correlationId).WithHeader("destination", destination);
@@ -107,7 +106,7 @@ internal sealed class MessageBus : IBus
         _logger.LogInformation("Sent {Type} [{MessageId}] with correlation {CorrelationId} to {Destination}", envelope.Type, envelope.MessageId, correlationId, destination);
     }
 
-    private static EventEnvelope CreateEnvelope<T>(T message, string action) where T : class
+    private static EventEnvelope CreateEnvelope<T>(T message, string action)
     {
         return new EventEnvelope
         {

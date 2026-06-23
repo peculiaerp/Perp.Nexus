@@ -69,8 +69,7 @@ public static class CoreServiceExtensions
     }
 
     public static IServiceCollection AddMessageConsumer<TMessage, TConsumer>(this IServiceCollection services)
-        where TMessage : class
-        where TConsumer : class, IConsumer<TMessage>
+      where TConsumer : class, IConsumer<TMessage>
     {
         services.AddScoped<IConsumer<TMessage>, TConsumer>();
         services.AddScoped<TConsumer>();

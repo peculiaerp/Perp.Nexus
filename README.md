@@ -1,11 +1,11 @@
-# Pep.Common
-Perculiar ERP Mediator.
+# Pep.Nexus
+Perculiar ERP Messaging Framework.
 
 ## Create and publish package
 ### Perp.Nexus.Core
 ```powershell
 $owner="peculiaerp"
-$version="1.0.0"
+$version="1.0.1"
 
 dotnet pack Perp.Nexus.Core --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
 
@@ -15,7 +15,7 @@ dotnet nuget push ..\packages\Perp.Nexus.Core.$version.nupkg --api-key $env:PECU
 ### Perp.Nexus.Infrastructure
 ```powershell
 $owner="peculiaerp"
-$version="1.0.0"
+$version="1.0.1"
 
 dotnet pack Perp.Nexus.Infrastructure --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/Perp.Nexus -o ..\packages
 
